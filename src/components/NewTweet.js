@@ -15,7 +15,20 @@ const NewTweet = () => {
     // TODO: Add Tweet to store
   };
 
-  return <div>New Tweet</div>;
+  return (
+    <div>
+      <h3 className="center">Compose new Tweet</h3>
+      <form className="new-tweet" onSubmit={handleSubmit}>
+        <textarea
+          className="textarea"
+          placeholder="What's happening?"
+          value={text}
+          onChange={handleChange}
+          maxLength={280}
+        />
+      </form>
+    </div>
+  );
 };
 
 export default NewTweet;
