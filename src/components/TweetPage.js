@@ -1,8 +1,23 @@
 import { connect } from "react-redux";
+import Tweet from "./Tweet.js";
+import NewTweet from "./NewTweet";
 
 const TweetPage = (props) => {
   console.log(props);
-  return <div>TWEET PAGE</div>;
+  return (
+    <div>
+      <Tweet id={props.id} />
+      <NewTweet id={props.id} />
+      {props.replies.length !== 0 && <h3 className="center">Replies</h3>}
+      <ul>
+        {props.replies.map((replyId) => (
+          <li key={replyId}>
+            <Tweet id={replyId} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 const mapStateToProps = ({ authedUser, tweets, users }, props) => {
