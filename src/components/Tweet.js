@@ -6,6 +6,7 @@ import {
   TiHeartOutline,
   TiHeartFullOutline,
 } from "react-icons/ti";
+import { handleToggleTweet } from "../actions/tweets.js";
 
 const Tweet = (props) => {
   if (props.tweet === null) {
@@ -19,7 +20,14 @@ const Tweet = (props) => {
 
   const handleLike = (e) => {
     e.preventDefault();
-    // TODO - handle like
+    const { dispatch, tweet, authedUser } = props;
+    dispatch(
+      handleToggleTweet({
+        id: tweet.id,
+        hasLiked: tweet.hasLiked,
+        authedUser,
+      })
+    );
   };
 
   const { name, avatar, timestamp, text, hasLiked, likes, replies, parent } =
