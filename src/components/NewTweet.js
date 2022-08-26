@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { connect } from "react-redux";
+import { handleAddTweet } from "../actions/tweets.js";
 
-const NewTweet = () => {
+const NewTweet = ({ dispatch, id }) => {
   const [text, setText] = useState("");
 
   const TEXT_AREA_MAX = 280;
@@ -12,9 +14,9 @@ const NewTweet = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(handleAddTweet(text, id));
     console.log("New Tweet: ", text);
     setText("");
-    // TODO: Add Tweet to store
   };
 
   const tweetLeft = TEXT_AREA_MAX - text.length;
@@ -40,4 +42,4 @@ const NewTweet = () => {
   );
 };
 
-export default NewTweet;
+export default connect()(NewTweet);
