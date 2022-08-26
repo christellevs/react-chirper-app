@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { formatTweet, formatDate } from "../utils/helpers";
 
 import {
@@ -30,10 +31,19 @@ const Tweet = (props) => {
     );
   };
 
-  const { name, avatar, timestamp, text, hasLiked, likes, replies, parent } =
-    props.tweet;
+  const {
+    name,
+    avatar,
+    timestamp,
+    text,
+    hasLiked,
+    likes,
+    replies,
+    id,
+    parent,
+  } = props.tweet;
   return (
-    <div className="tweet">
+    <Link to={`/tweet/${id}`} className="tweet">
       <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
       <div className="tweet-info">
         <div>
@@ -62,7 +72,7 @@ const Tweet = (props) => {
           <span>{likes !== 0 && likes}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
