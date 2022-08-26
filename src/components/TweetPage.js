@@ -1,6 +1,18 @@
 import { connect } from "react-redux";
 import Tweet from "./Tweet.js";
 import NewTweet from "./NewTweet";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+const withRouter = (Component) => {
+  const ComponentWithRouterProp = (props) => {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  };
+
+  return ComponentWithRouterProp;
+};
 
 const TweetPage = (props) => {
   console.log(props);
@@ -21,7 +33,7 @@ const TweetPage = (props) => {
 };
 
 const mapStateToProps = ({ authedUser, tweets, users }, props) => {
-  const { id } = props.match.params;
+  const { id } = props.router.params;
 
   return {
     id,
@@ -33,4 +45,4 @@ const mapStateToProps = ({ authedUser, tweets, users }, props) => {
   };
 };
 
-export default connect(mapStateToProps)(TweetPage);
+export default withRouter(connect(mapStateToProps)(TweetPage));

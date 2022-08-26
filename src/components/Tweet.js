@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { formatTweet, formatDate } from "../utils/helpers";
+import { useNavigate } from "react-router-dom";
 
 import {
   TiArrowBackOutline,
@@ -10,13 +11,15 @@ import {
 import { handleToggleTweet } from "../actions/tweets.js";
 
 const Tweet = (props) => {
+  const navigate = useNavigate();
+
   if (props.tweet === null) {
     return <p>This Tweet doesn't exist</p>;
   }
 
   const toParent = (e, id) => {
     e.preventDefault();
-    // TODO - redirect to parent tweet
+    navigate(`/tweet/${id}`);
   };
 
   const handleLike = (e) => {
