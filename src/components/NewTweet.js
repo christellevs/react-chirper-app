@@ -3,6 +3,8 @@ import { useState } from "react";
 const NewTweet = () => {
   const [text, setText] = useState("");
 
+  const TEXT_AREA_MAX = 280;
+
   const handleChange = (e) => {
     const text = e.target.value;
     setText(text);
@@ -15,6 +17,8 @@ const NewTweet = () => {
     // TODO: Add Tweet to store
   };
 
+  const tweetLeft = TEXT_AREA_MAX - text.length;
+
   return (
     <div>
       <h3 className="center">Compose new Tweet</h3>
@@ -24,8 +28,12 @@ const NewTweet = () => {
           placeholder="What's happening?"
           value={text}
           onChange={handleChange}
-          maxLength={280}
+          maxLength={TEXT_AREA_MAX}
         />
+        {tweetLeft <= 100 && <div className="tweet-length">{tweetLeft}</div>}
+        <button className="btn" type="submit" disabled={text === ""}>
+          Submit
+        </button>
       </form>
     </div>
   );
